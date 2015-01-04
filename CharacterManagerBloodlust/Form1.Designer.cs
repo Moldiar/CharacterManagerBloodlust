@@ -45,9 +45,20 @@
             this.listView2 = new System.Windows.Forms.ListView();
             this.OrderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Content = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.BaseInfo = new System.Windows.Forms.TabPage();
+            this.Statistics = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
+            this.Character.SuspendLayout();
             this.Scenario.SuspendLayout();
             this.Journal.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -107,6 +118,7 @@
             // 
             // Character
             // 
+            this.Character.Controls.Add(this.tabControl2);
             this.Character.Location = new System.Drawing.Point(4, 22);
             this.Character.Name = "Character";
             this.Character.Padding = new System.Windows.Forms.Padding(3);
@@ -194,6 +206,76 @@
             this.Content.Text = "Description";
             this.Content.Width = 348;
             // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.BaseInfo);
+            this.tabControl2.Controls.Add(this.Statistics);
+            this.tabControl2.Controls.Add(this.tabPage1);
+            this.tabControl2.Controls.Add(this.tabPage2);
+            this.tabControl2.Location = new System.Drawing.Point(0, 0);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(390, 227);
+            this.tabControl2.TabIndex = 0;
+            // 
+            // BaseInfo
+            // 
+            this.BaseInfo.Location = new System.Drawing.Point(4, 22);
+            this.BaseInfo.Name = "BaseInfo";
+            this.BaseInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.BaseInfo.Size = new System.Drawing.Size(382, 201);
+            this.BaseInfo.TabIndex = 0;
+            this.BaseInfo.Text = "Basic Information";
+            this.BaseInfo.UseVisualStyleBackColor = true;
+            // 
+            // Statistics
+            // 
+            this.Statistics.Location = new System.Drawing.Point(4, 22);
+            this.Statistics.Name = "Statistics";
+            this.Statistics.Padding = new System.Windows.Forms.Padding(3);
+            this.Statistics.Size = new System.Drawing.Size(382, 201);
+            this.Statistics.TabIndex = 1;
+            this.Statistics.Text = "Statistics";
+            this.Statistics.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(382, 201);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Inventory";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.richTextBox2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(382, 201);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Notes";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(382, 201);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(382, 201);
+            this.richTextBox2.TabIndex = 1;
+            this.richTextBox2.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,8 +290,12 @@
             this.Name = "Form1";
             this.Text = "Character Manager - Bloodlust";
             this.tabControl1.ResumeLayout(false);
+            this.Character.ResumeLayout(false);
             this.Scenario.ResumeLayout(false);
             this.Journal.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,6 +320,13 @@
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ColumnHeader OrderNumber;
         private System.Windows.Forms.ColumnHeader Content;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage BaseInfo;
+        private System.Windows.Forms.TabPage Statistics;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
 
