@@ -47,14 +47,18 @@ namespace CharacterManagerBloodlust
             {
                 pass = reader.GetString(0);
             }
+            reader.Close();
+            conn.Close();
             if (pass == password)
             {
+
                 return true;
             }
             else
             {
                 return false;
             }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,7 +67,18 @@ namespace CharacterManagerBloodlust
             {
                 WindowInit winInit = new WindowInit();
 
-                winInit.MainWin(this);
+                MySqlConnection conn = dc.EstablishConn();
+                string AccName = "";
+                string query = "SELECT `AccountName` FROM `Account` WHERE `AccountLogin`='" + LoginBox.Text + "';";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    AccName = reader.GetString(0);
+                }
+
+                winInit.MainWin(this,AccName);
             }
             else
             {
