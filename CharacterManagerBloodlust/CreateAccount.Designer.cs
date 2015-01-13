@@ -62,15 +62,17 @@
             // 
             this.PasswordBox.Location = new System.Drawing.Point(151, 64);
             this.PasswordBox.Name = "PasswordBox";
+            this.PasswordBox.PasswordChar = '#';
             this.PasswordBox.Size = new System.Drawing.Size(121, 20);
-            this.PasswordBox.TabIndex = 2;
+            this.PasswordBox.TabIndex = 3;
             // 
             // RePasswordBox
             // 
             this.RePasswordBox.Location = new System.Drawing.Point(151, 90);
             this.RePasswordBox.Name = "RePasswordBox";
+            this.RePasswordBox.PasswordChar = '#';
             this.RePasswordBox.Size = new System.Drawing.Size(121, 20);
-            this.RePasswordBox.TabIndex = 3;
+            this.RePasswordBox.TabIndex = 4;
             // 
             // label2
             // 
@@ -116,7 +118,7 @@
             this.AccTypeBox.Location = new System.Drawing.Point(151, 116);
             this.AccTypeBox.Name = "AccTypeBox";
             this.AccTypeBox.Size = new System.Drawing.Size(121, 21);
-            this.AccTypeBox.TabIndex = 8;
+            this.AccTypeBox.TabIndex = 5;
             // 
             // label4
             // 
@@ -141,7 +143,7 @@
             this.LoginBox.Location = new System.Drawing.Point(151, 38);
             this.LoginBox.Name = "LoginBox";
             this.LoginBox.Size = new System.Drawing.Size(121, 20);
-            this.LoginBox.TabIndex = 10;
+            this.LoginBox.TabIndex = 2;
             // 
             // CreateAccount
             // 

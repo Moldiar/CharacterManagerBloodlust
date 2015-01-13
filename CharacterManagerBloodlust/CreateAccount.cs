@@ -23,6 +23,7 @@ namespace CharacterManagerBloodlust
 
         private void PopulateAccTypeList()
         {
+            List<string> combo = new List<string>();
             MySqlConnection conn = dc.EstablishConn();
             string query = "SELECT * FROM `AccType`;";
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -30,8 +31,11 @@ namespace CharacterManagerBloodlust
 
             while (reader.Read())
             {
-                AccTypeBox.Items.Add(reader.GetString(1));
+                combo.Add(reader.GetString(1));
             }
+            foreach(string c in combo)
+            AccTypeBox.Items.Add(c);
+            AccTypeBox.SelectedIndex = AccTypeBox.Items.Count - 1;
             reader.Close();
             conn.Close();
         }
