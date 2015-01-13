@@ -20,6 +20,33 @@ namespace CharacterManagerBloodlust
             InitializeComponent();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conn = dc.EstablishConn();
+            if (LoggingIn(conn))
+            {
+                WindowInit winInit = new WindowInit();
+
+                string AccName = "";
+                string query = "SELECT `AccountName` FROM `Account` WHERE `AccountLogin`='" + LoginBox.Text + "';";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    AccName = reader.GetString(0);
+                }
+                conn.Close();
+                reader.Close();
+                winInit.MainWin(this, AccName);
+            }
+            else
+            {
+                MessageBox.Show("Wrong Login and/or Password", "Failed to Login", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         { 
             WindowInit winInit = new WindowInit();
@@ -32,12 +59,11 @@ namespace CharacterManagerBloodlust
             Environment.Exit(0);
         }
 
-        private bool LoggingIn()
+        private bool LoggingIn(MySqlConnection conn)
         {
             string login=LoginBox.Text;
             string password=PasswordBox.Text;
             string pass="";
-            MySqlConnection conn = dc.EstablishConn();
 
             string query = "SELECT `AccountPassword` FROM `Account` WHERE `AccountLogin`='"+login+"';";
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -48,7 +74,6 @@ namespace CharacterManagerBloodlust
                 pass = reader.GetString(0);
             }
             reader.Close();
-            conn.Close();
             if (pass == password)
             {
 
@@ -61,29 +86,6 @@ namespace CharacterManagerBloodlust
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (LoggingIn())
-            {
-                WindowInit winInit = new WindowInit();
-
-                MySqlConnection conn = dc.EstablishConn();
-                string AccName = "";
-                string query = "SELECT `AccountName` FROM `Account` WHERE `AccountLogin`='" + LoginBox.Text + "';";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    AccName = reader.GetString(0);
-                }
-
-                winInit.MainWin(this,AccName);
-            }
-            else
-            {
-                MessageBox.Show("Wrong Login and/or Password","Failed to Login",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-            }
-        }
+        
     }
 }

@@ -43,11 +43,13 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.NotesBox = new System.Windows.Forms.RichTextBox();
             this.Scenario = new System.Windows.Forms.TabPage();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.button5 = new System.Windows.Forms.Button();
+            this.FlowView = new System.Windows.Forms.ListView();
             this.OrderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Content = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Journal = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.button6 = new System.Windows.Forms.Button();
+            this.JournalView = new System.Windows.Forms.ListView();
             this.JournalName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -57,9 +59,8 @@
             this.UsernameLabel = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.Delete = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Character.SuspendLayout();
             this.InventoryBox.SuspendLayout();
@@ -90,9 +91,9 @@
             // 
             this.button1.Location = new System.Drawing.Point(259, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 23);
+            this.button1.Size = new System.Drawing.Size(99, 23);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Load Scenario";
+            this.button1.Text = "Reload Scenarios";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -207,8 +208,9 @@
             // 
             // Scenario
             // 
+            this.Scenario.Controls.Add(this.button7);
             this.Scenario.Controls.Add(this.button5);
-            this.Scenario.Controls.Add(this.listView2);
+            this.Scenario.Controls.Add(this.FlowView);
             this.Scenario.Location = new System.Drawing.Point(4, 22);
             this.Scenario.Name = "Scenario";
             this.Scenario.Padding = new System.Windows.Forms.Padding(3);
@@ -217,18 +219,27 @@
             this.Scenario.Text = "Scenario";
             this.Scenario.UseVisualStyleBackColor = true;
             // 
-            // listView2
+            // button5
             // 
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.button5.Location = new System.Drawing.Point(268, 204);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(122, 23);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "New Scenario Entry";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // FlowView
+            // 
+            this.FlowView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.OrderNumber,
-            this.Content,
-            this.Delete});
-            this.listView2.Location = new System.Drawing.Point(3, 3);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(384, 201);
-            this.listView2.TabIndex = 1;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.Content});
+            this.FlowView.Location = new System.Drawing.Point(3, 3);
+            this.FlowView.Name = "FlowView";
+            this.FlowView.Size = new System.Drawing.Size(384, 201);
+            this.FlowView.TabIndex = 1;
+            this.FlowView.UseCompatibleStateImageBehavior = false;
+            this.FlowView.View = System.Windows.Forms.View.Details;
             // 
             // OrderNumber
             // 
@@ -238,32 +249,43 @@
             // Content
             // 
             this.Content.Text = "Description";
-            this.Content.Width = 289;
+            this.Content.Width = 348;
             // 
             // Journal
             // 
             this.Journal.BackColor = System.Drawing.Color.Transparent;
+            this.Journal.Controls.Add(this.button8);
             this.Journal.Controls.Add(this.button6);
-            this.Journal.Controls.Add(this.listView1);
+            this.Journal.Controls.Add(this.JournalView);
             this.Journal.Location = new System.Drawing.Point(4, 22);
             this.Journal.Name = "Journal";
             this.Journal.Size = new System.Drawing.Size(390, 227);
             this.Journal.TabIndex = 2;
             this.Journal.Text = "Journal";
             // 
-            // listView1
+            // button6
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.button6.Location = new System.Drawing.Point(268, 204);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(122, 23);
+            this.button6.TabIndex = 11;
+            this.button6.Text = "Add Entry";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // JournalView
+            // 
+            this.JournalView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.JournalName,
             this.Description,
             this.Date,
             this.Importance});
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(390, 204);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.JournalView.Location = new System.Drawing.Point(0, 0);
+            this.JournalView.Name = "JournalView";
+            this.JournalView.Size = new System.Drawing.Size(390, 204);
+            this.JournalView.TabIndex = 0;
+            this.JournalView.UseCompatibleStateImageBehavior = false;
+            this.JournalView.View = System.Windows.Forms.View.Details;
             // 
             // JournalName
             // 
@@ -287,7 +309,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(29, 153);
+            this.button2.Location = new System.Drawing.Point(28, 152);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
@@ -326,34 +348,32 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(11, 234);
+            this.button4.Location = new System.Drawing.Point(12, 234);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(122, 23);
             this.button4.TabIndex = 10;
             this.button4.Text = "New Hero";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // button7
             // 
-            this.button5.Location = new System.Drawing.Point(268, 204);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(122, 23);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "New Scenario Entry";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button7.Location = new System.Drawing.Point(3, 204);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(122, 23);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Reload Entries";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // Delete
+            // button8
             // 
-            this.Delete.Text = "Delete?";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(268, 204);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(122, 23);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "Add Entry";
-            this.button6.UseVisualStyleBackColor = true;
+            this.button8.Location = new System.Drawing.Point(0, 204);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(122, 23);
+            this.button8.TabIndex = 12;
+            this.button8.Text = "Reload Journal Entries";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // MainWindow
             // 
@@ -396,12 +416,12 @@
         private System.Windows.Forms.TabPage Character;
         private System.Windows.Forms.TabPage Scenario;
         private System.Windows.Forms.TabPage Journal;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView JournalView;
         private System.Windows.Forms.ColumnHeader JournalName;
         private System.Windows.Forms.ColumnHeader Description;
         private System.Windows.Forms.ColumnHeader Date;
         private System.Windows.Forms.ColumnHeader Importance;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView FlowView;
         private System.Windows.Forms.ColumnHeader OrderNumber;
         private System.Windows.Forms.ColumnHeader Content;
         private System.Windows.Forms.TabControl InventoryBox;
@@ -416,10 +436,11 @@
         public System.Windows.Forms.Label UsernameLabel;
         public System.Windows.Forms.ComboBox ScenarioBox;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.ColumnHeader Delete;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 

@@ -23,6 +23,7 @@ namespace CharacterManagerBloodlust
             {
                 conn = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
                 conn.Open();
+                conn.Ping();
                 return conn;
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)

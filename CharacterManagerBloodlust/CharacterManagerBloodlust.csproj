@@ -68,6 +68,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmallForms\FlowDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SmallForms\FlowDialog.Designer.cs">
+      <DependentUpon>FlowDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SmallForms\JournalDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SmallForms\JournalDialog.Designer.cs">
+      <DependentUpon>JournalDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="SmallForms\ScenarioDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +105,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SmallForms\FlowDialog.resx">
+      <DependentUpon>FlowDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SmallForms\JournalDialog.resx">
+      <DependentUpon>JournalDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SmallForms\ScenarioDialog.resx">
       <DependentUpon>ScenarioDialog.cs</DependentUpon>
     </EmbeddedResource>
