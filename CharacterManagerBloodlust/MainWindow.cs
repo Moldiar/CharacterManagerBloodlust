@@ -21,7 +21,6 @@ namespace CharacterManagerBloodlust
         public MainWindow()
         {
             InitializeComponent();
-            LoadScenarioEntries();
         }
 
         //
@@ -32,7 +31,8 @@ namespace CharacterManagerBloodlust
         {
             ScenarioBox.Items.Clear();
             SimpleScenarioReload(GetAccID());
-            LoadScenarioEntries();
+            button7_Click(sender,e);
+            button8_Click(sender, e);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -54,7 +54,10 @@ namespace CharacterManagerBloodlust
             NewScenario();
         }
 
-
+        private void button4_Click(object sender, EventArgs e)
+        {
+            NewHero();
+        }
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -119,6 +122,7 @@ namespace CharacterManagerBloodlust
 
             AccHasScen(AccID,FindScenarioAgain(ScenarioName));
 
+            ScenarioBox.Items.Clear();
             SimpleScenarioReload(AccID);
 
             return true;
@@ -304,6 +308,7 @@ namespace CharacterManagerBloodlust
             }
             conn.Close();
 
+            FlowView.Items.Clear();
             LoadScenarioEntries();
 
             return true;
@@ -448,9 +453,68 @@ namespace CharacterManagerBloodlust
             }
             conn.Close();
 
+            JournalView.Items.Clear();
             LoadJournalEntries();
 
             return true;
+        }
+
+        private bool NewHero()
+        {
+            string[] scenario = GetHeroData();
+            if (scenario[0] == null || scenario[1] == null) return false;
+            string ScenarioName = scenario[0];
+            string ScenarioDesc = scenario[1];
+
+            MySqlConnection conn = dc.EstablishConn();
+            try
+            {
+                string query = "INSERT INTO `Scenario`(`ScenarioName`, `ScenarioDescription`) VALUES ('" + ScenarioName + "','" + ScenarioDesc + "')";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            conn.Close();
+
+            return true;
+        }
+
+        private string[] GetHeroData()
+        {
+            SmallForms.HeroDialog sd = new SmallForms.HeroDialog();
+            string[] x = new string[9];
+
+            if (sd.ShowDialog(this) == DialogResult.OK)
+            {
+                x[0] = sd.NameBox.Text;
+                x[1] = sd.SurnameBox.Text;
+                if (sd.MaleRadio.Checked) x[2] = "Male"; 
+                else x[2] = "Female";
+                x[3] = sd.AlignmentBox.Text;
+                x[4] = sd.SubraceBox.SelectedItem.ToString();
+                x[5] = sd.GodBox.SelectedItem.ToString();
+                x[6] = sd.ZodiacView.SelectedItems.ToString();
+                x[7] = sd.PathTreeView.SelectedNode.Text;
+                x[8] = sd.BloodlineBox.SelectedItem.ToString();
+            }
+            else
+            {
+                x[0] = null;
+                x[1] = null;
+                x[2] = null;
+                x[3] = null;
+                x[4] = null;
+                x[5] = null;
+                x[6] = null;
+                x[7] = null;
+                x[8] = null;
+            }
+            sd.Dispose();
+            return x;
         }
 
     }

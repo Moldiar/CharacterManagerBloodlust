@@ -12,10 +12,10 @@ namespace CharacterManagerBloodlust
     {
         public MySqlConnection EstablishConn()
         {
-            string server = "sql3.freesqldatabase.com";
-            string database = "sql363503";
-            string uid = "sql363503";
-            string password = "kT4!rC1*";
+            string server = "localhost";
+            string database = "cmb";
+            string uid = "Moldiar";
+            string password = "Starter0";
             string connectionString;
             MySqlConnection conn;
             connectionString = "SERVER=" + server + "; PORT = 3306 ;" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -31,6 +31,16 @@ namespace CharacterManagerBloodlust
                 MessageBox.Show(ex.Message);
             }
             return null;
+        }
+
+        public MySqlDataReader ReadQuery(string query)
+        {
+            MySqlConnection conn = EstablishConn();
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            conn.Close();
+            return reader;
         }
     }
 }

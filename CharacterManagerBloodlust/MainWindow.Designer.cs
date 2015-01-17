@@ -43,11 +43,13 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.NotesBox = new System.Windows.Forms.RichTextBox();
             this.Scenario = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.FlowView = new System.Windows.Forms.ListView();
             this.OrderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Content = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Journal = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.JournalView = new System.Windows.Forms.ListView();
             this.JournalName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -59,8 +61,6 @@
             this.UsernameLabel = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Character.SuspendLayout();
             this.InventoryBox.SuspendLayout();
@@ -218,6 +218,17 @@
             this.Scenario.TabIndex = 1;
             this.Scenario.Text = "Scenario";
             this.Scenario.UseVisualStyleBackColor = true;
+            this.Scenario.Enter += new System.EventHandler(this.button7_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(3, 204);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(122, 23);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Reload Entries";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button5
             // 
@@ -262,6 +273,17 @@
             this.Journal.Size = new System.Drawing.Size(390, 227);
             this.Journal.TabIndex = 2;
             this.Journal.Text = "Journal";
+            this.Journal.Enter += new System.EventHandler(this.button8_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(0, 204);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(122, 23);
+            this.button8.TabIndex = 12;
+            this.button8.Text = "Reload Journal Entries";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button6
             // 
@@ -354,26 +376,7 @@
             this.button4.TabIndex = 10;
             this.button4.Text = "New Hero";
             this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(3, 204);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(122, 23);
-            this.button7.TabIndex = 12;
-            this.button7.Text = "Reload Entries";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(0, 204);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(122, 23);
-            this.button8.TabIndex = 12;
-            this.button8.Text = "Reload Journal Entries";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // MainWindow
             // 
