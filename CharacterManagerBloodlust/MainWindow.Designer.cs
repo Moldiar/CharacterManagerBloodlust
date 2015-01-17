@@ -35,11 +35,31 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Character = new System.Windows.Forms.TabPage();
-            this.InventoryBox = new System.Windows.Forms.TabControl();
+            this.TabControl = new System.Windows.Forms.TabControl();
             this.BaseInfo = new System.Windows.Forms.TabPage();
-            this.Statistics = new System.Windows.Forms.TabPage();
+            this.button9 = new System.Windows.Forms.Button();
+            this.ZodiacField = new System.Windows.Forms.TextBox();
+            this.BloodlineField = new System.Windows.Forms.TextBox();
+            this.PathField = new System.Windows.Forms.TextBox();
+            this.GodField = new System.Windows.Forms.TextBox();
+            this.SubraceField = new System.Windows.Forms.TextBox();
+            this.RaceField = new System.Windows.Forms.TextBox();
+            this.SexField = new System.Windows.Forms.TextBox();
+            this.AlignmentField = new System.Windows.Forms.TextBox();
+            this.SurnameField = new System.Windows.Forms.TextBox();
+            this.NameField = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.InventoryBox = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.NotesBox = new System.Windows.Forms.RichTextBox();
             this.Scenario = new System.Windows.Forms.TabPage();
@@ -63,7 +83,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Character.SuspendLayout();
-            this.InventoryBox.SuspendLayout();
+            this.TabControl.SuspendLayout();
+            this.BaseInfo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.Scenario.SuspendLayout();
@@ -104,6 +125,7 @@
             this.CharacterList.Name = "CharacterList";
             this.CharacterList.Size = new System.Drawing.Size(123, 82);
             this.CharacterList.TabIndex = 3;
+            this.CharacterList.Click += new System.EventHandler(this.CharListClick);
             // 
             // label2
             // 
@@ -127,7 +149,7 @@
             // 
             // Character
             // 
-            this.Character.Controls.Add(this.InventoryBox);
+            this.Character.Controls.Add(this.TabControl);
             this.Character.Location = new System.Drawing.Point(4, 22);
             this.Character.Name = "Character";
             this.Character.Padding = new System.Windows.Forms.Padding(3);
@@ -136,20 +158,40 @@
             this.Character.Text = "Character";
             this.Character.UseVisualStyleBackColor = true;
             // 
-            // InventoryBox
+            // TabControl
             // 
-            this.InventoryBox.Controls.Add(this.BaseInfo);
-            this.InventoryBox.Controls.Add(this.Statistics);
-            this.InventoryBox.Controls.Add(this.tabPage1);
-            this.InventoryBox.Controls.Add(this.tabPage2);
-            this.InventoryBox.Location = new System.Drawing.Point(0, 0);
-            this.InventoryBox.Name = "InventoryBox";
-            this.InventoryBox.SelectedIndex = 0;
-            this.InventoryBox.Size = new System.Drawing.Size(390, 227);
-            this.InventoryBox.TabIndex = 0;
+            this.TabControl.Controls.Add(this.BaseInfo);
+            this.TabControl.Controls.Add(this.tabPage1);
+            this.TabControl.Controls.Add(this.tabPage2);
+            this.TabControl.Location = new System.Drawing.Point(0, 0);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(390, 227);
+            this.TabControl.TabIndex = 0;
             // 
             // BaseInfo
             // 
+            this.BaseInfo.Controls.Add(this.button9);
+            this.BaseInfo.Controls.Add(this.ZodiacField);
+            this.BaseInfo.Controls.Add(this.BloodlineField);
+            this.BaseInfo.Controls.Add(this.PathField);
+            this.BaseInfo.Controls.Add(this.GodField);
+            this.BaseInfo.Controls.Add(this.SubraceField);
+            this.BaseInfo.Controls.Add(this.RaceField);
+            this.BaseInfo.Controls.Add(this.SexField);
+            this.BaseInfo.Controls.Add(this.AlignmentField);
+            this.BaseInfo.Controls.Add(this.SurnameField);
+            this.BaseInfo.Controls.Add(this.NameField);
+            this.BaseInfo.Controls.Add(this.label13);
+            this.BaseInfo.Controls.Add(this.label12);
+            this.BaseInfo.Controls.Add(this.label11);
+            this.BaseInfo.Controls.Add(this.label10);
+            this.BaseInfo.Controls.Add(this.label9);
+            this.BaseInfo.Controls.Add(this.label8);
+            this.BaseInfo.Controls.Add(this.label7);
+            this.BaseInfo.Controls.Add(this.label6);
+            this.BaseInfo.Controls.Add(this.label5);
+            this.BaseInfo.Controls.Add(this.label4);
             this.BaseInfo.Location = new System.Drawing.Point(4, 22);
             this.BaseInfo.Name = "BaseInfo";
             this.BaseInfo.Padding = new System.Windows.Forms.Padding(3);
@@ -158,19 +200,189 @@
             this.BaseInfo.Text = "Basic Information";
             this.BaseInfo.UseVisualStyleBackColor = true;
             // 
-            // Statistics
+            // button9
             // 
-            this.Statistics.Location = new System.Drawing.Point(4, 22);
-            this.Statistics.Name = "Statistics";
-            this.Statistics.Padding = new System.Windows.Forms.Padding(3);
-            this.Statistics.Size = new System.Drawing.Size(382, 201);
-            this.Statistics.TabIndex = 1;
-            this.Statistics.Text = "Statistics";
-            this.Statistics.UseVisualStyleBackColor = true;
+            this.button9.Location = new System.Drawing.Point(287, 162);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(89, 23);
+            this.button9.TabIndex = 21;
+            this.button9.Text = "Update Hero";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // ZodiacField
+            // 
+            this.ZodiacField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ZodiacField.Location = new System.Drawing.Point(287, 58);
+            this.ZodiacField.Name = "ZodiacField";
+            this.ZodiacField.Size = new System.Drawing.Size(89, 20);
+            this.ZodiacField.TabIndex = 20;
+            // 
+            // BloodlineField
+            // 
+            this.BloodlineField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BloodlineField.Location = new System.Drawing.Point(287, 32);
+            this.BloodlineField.Name = "BloodlineField";
+            this.BloodlineField.Size = new System.Drawing.Size(89, 20);
+            this.BloodlineField.TabIndex = 19;
+            // 
+            // PathField
+            // 
+            this.PathField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PathField.Location = new System.Drawing.Point(287, 6);
+            this.PathField.Name = "PathField";
+            this.PathField.Size = new System.Drawing.Size(89, 20);
+            this.PathField.TabIndex = 18;
+            // 
+            // GodField
+            // 
+            this.GodField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.GodField.Location = new System.Drawing.Point(101, 162);
+            this.GodField.Name = "GodField";
+            this.GodField.Size = new System.Drawing.Size(89, 20);
+            this.GodField.TabIndex = 17;
+            // 
+            // SubraceField
+            // 
+            this.SubraceField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SubraceField.Location = new System.Drawing.Point(101, 136);
+            this.SubraceField.Name = "SubraceField";
+            this.SubraceField.Size = new System.Drawing.Size(89, 20);
+            this.SubraceField.TabIndex = 16;
+            // 
+            // RaceField
+            // 
+            this.RaceField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RaceField.Location = new System.Drawing.Point(101, 110);
+            this.RaceField.Name = "RaceField";
+            this.RaceField.Size = new System.Drawing.Size(89, 20);
+            this.RaceField.TabIndex = 15;
+            // 
+            // SexField
+            // 
+            this.SexField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SexField.Location = new System.Drawing.Point(101, 58);
+            this.SexField.Name = "SexField";
+            this.SexField.Size = new System.Drawing.Size(89, 20);
+            this.SexField.TabIndex = 14;
+            // 
+            // AlignmentField
+            // 
+            this.AlignmentField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AlignmentField.Location = new System.Drawing.Point(101, 84);
+            this.AlignmentField.Name = "AlignmentField";
+            this.AlignmentField.Size = new System.Drawing.Size(89, 20);
+            this.AlignmentField.TabIndex = 13;
+            // 
+            // SurnameField
+            // 
+            this.SurnameField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SurnameField.Location = new System.Drawing.Point(101, 32);
+            this.SurnameField.Name = "SurnameField";
+            this.SurnameField.Size = new System.Drawing.Size(89, 20);
+            this.SurnameField.TabIndex = 11;
+            // 
+            // NameField
+            // 
+            this.NameField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NameField.Location = new System.Drawing.Point(101, 6);
+            this.NameField.Name = "NameField";
+            this.NameField.Size = new System.Drawing.Size(89, 20);
+            this.NameField.TabIndex = 10;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 112);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(59, 13);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Hero Race";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 138);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(73, 13);
+            this.label12.TabIndex = 8;
+            this.label12.Text = "Hero Subrace";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(196, 60);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(66, 13);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Hero Zodiac";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 164);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 13);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Hero God";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(196, 34);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(76, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Hero Bloodline";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(196, 8);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(55, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Hero Path";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 86);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(79, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Hero Alignment";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 60);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Hero Sex";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 34);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(75, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Hero Surname";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Hero Name";
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.InventoryBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -179,13 +391,13 @@
             this.tabPage1.Text = "Inventory";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // InventoryBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(382, 201);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.InventoryBox.Location = new System.Drawing.Point(0, 0);
+            this.InventoryBox.Name = "InventoryBox";
+            this.InventoryBox.Size = new System.Drawing.Size(382, 201);
+            this.InventoryBox.TabIndex = 0;
+            this.InventoryBox.Text = "";
             // 
             // tabPage2
             // 
@@ -331,11 +543,11 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(28, 152);
+            this.button2.Location = new System.Drawing.Point(12, 152);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(122, 23);
             this.button2.TabIndex = 6;
-            this.button2.Text = "Test";
+            this.button2.Text = "Load Characters";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -397,9 +609,12 @@
             this.Name = "MainWindow";
             this.Text = "Character Manager - Bloodlust";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
+            this.Load += new System.EventHandler(this.LoadHeroes);
             this.tabControl1.ResumeLayout(false);
             this.Character.ResumeLayout(false);
-            this.InventoryBox.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
+            this.BaseInfo.ResumeLayout(false);
+            this.BaseInfo.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.Scenario.ResumeLayout(false);
@@ -427,11 +642,10 @@
         private System.Windows.Forms.ListView FlowView;
         private System.Windows.Forms.ColumnHeader OrderNumber;
         private System.Windows.Forms.ColumnHeader Content;
-        private System.Windows.Forms.TabControl InventoryBox;
+        private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage BaseInfo;
-        private System.Windows.Forms.TabPage Statistics;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox InventoryBox;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.RichTextBox NotesBox;
         private System.Windows.Forms.Button button2;
@@ -444,6 +658,27 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox SubraceField;
+        private System.Windows.Forms.TextBox RaceField;
+        private System.Windows.Forms.TextBox SexField;
+        private System.Windows.Forms.TextBox AlignmentField;
+        private System.Windows.Forms.TextBox SurnameField;
+        private System.Windows.Forms.TextBox NameField;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.TextBox ZodiacField;
+        private System.Windows.Forms.TextBox BloodlineField;
+        private System.Windows.Forms.TextBox PathField;
+        private System.Windows.Forms.TextBox GodField;
     }
 }
 

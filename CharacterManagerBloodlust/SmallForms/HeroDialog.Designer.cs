@@ -52,7 +52,7 @@
             this.GodBox = new System.Windows.Forms.ListBox();
             this.PantheonBox = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.ZodiacView = new System.Windows.Forms.ListView();
+            this.ZodiacBox = new System.Windows.Forms.ListBox();
             this.PathTreeView = new System.Windows.Forms.TreeView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -290,25 +290,25 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.ZodiacView);
+            this.panel4.Controls.Add(this.ZodiacBox);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Location = new System.Drawing.Point(228, 167);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(365, 82);
             this.panel4.TabIndex = 18;
             // 
-            // ZodiacView
+            // ZodiacBox
             // 
-            this.ZodiacView.Location = new System.Drawing.Point(3, 14);
-            this.ZodiacView.MultiSelect = false;
-            this.ZodiacView.Name = "ZodiacView";
-            this.ZodiacView.Size = new System.Drawing.Size(355, 63);
-            this.ZodiacView.TabIndex = 7;
-            this.ZodiacView.UseCompatibleStateImageBehavior = false;
-            this.ZodiacView.View = System.Windows.Forms.View.SmallIcon;
+            this.ZodiacBox.ColumnWidth = 89;
+            this.ZodiacBox.FormattingEnabled = true;
+            this.ZodiacBox.Location = new System.Drawing.Point(24, 17);
+            this.ZodiacBox.Name = "ZodiacBox";
+            this.ZodiacBox.Size = new System.Drawing.Size(319, 56);
+            this.ZodiacBox.TabIndex = 19;
             // 
             // PathTreeView
             // 
+            this.PathTreeView.HideSelection = false;
             this.PathTreeView.Location = new System.Drawing.Point(3, 22);
             this.PathTreeView.Name = "PathTreeView";
             this.PathTreeView.Size = new System.Drawing.Size(148, 83);
@@ -339,6 +339,7 @@
             this.BloodlineBox.Name = "BloodlineBox";
             this.BloodlineBox.Size = new System.Drawing.Size(148, 95);
             this.BloodlineBox.TabIndex = 4;
+            this.BloodlineBox.Click += new System.EventHandler(this.BloodClick);
             // 
             // button2
             // 
@@ -364,6 +365,7 @@
             // 
             this.DescBox.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.DescBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DescBox.Enabled = false;
             this.DescBox.Location = new System.Drawing.Point(12, 250);
             this.DescBox.Multiline = true;
             this.DescBox.Name = "DescBox";
@@ -433,7 +435,6 @@
         public System.Windows.Forms.ComboBox AlignmentBox;
         public System.Windows.Forms.ListBox RaceBox;
         public System.Windows.Forms.ListBox SubraceBox;
-        public System.Windows.Forms.ListView ZodiacView;
         public System.Windows.Forms.TreeView PathTreeView;
         public System.Windows.Forms.ListBox BloodlineBox;
         public System.Windows.Forms.ListBox GodBox;
@@ -441,5 +442,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox DescBox;
+        public System.Windows.Forms.ListBox ZodiacBox;
     }
 }

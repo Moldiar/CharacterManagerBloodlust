@@ -37,16 +37,7 @@ namespace CharacterManagerBloodlust
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = dc.EstablishConn();
-            string query = "SELECT * FROM `AccType`;";
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                CharacterList.Items.Add(reader.GetString(1));
-            }
-
+            LoadHeroes(sender,e);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -79,6 +70,11 @@ namespace CharacterManagerBloodlust
         {
             JournalView.Items.Clear();
             LoadJournalEntries();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            UploadCharacter();
         }
 
         //
@@ -461,15 +457,28 @@ namespace CharacterManagerBloodlust
 
         private bool NewHero()
         {
-            string[] scenario = GetHeroData();
-            if (scenario[0] == null || scenario[1] == null) return false;
-            string ScenarioName = scenario[0];
-            string ScenarioDesc = scenario[1];
+            int AccID = GetAccID();
+            int ScenID = GetScenID();
+
+            string[] h = GetHeroData();
+            if (h[0] == null || h[1] == null || h[2] == null || h[3] == null || h[4] == null || h[5] == null || h[6] == null || h[7] == null || h[8] == null) return false;
+            string HeroName = h[0];
+            string HeroSurname = h[1];
+            string HeroSex = h[2];
+            string HeroAlignment = h[3];
+            int HeroSubrace = FindSubrace(h[4]);
+            int HeroGod = FindGod(h[5]);
+            int HeroZodiac = FindZodiac(h[6]);
+            int HeroPath = FindPath(h[7]);
+            int HeroBloodline = FindBloodline(h[8]);
+            int HSex = 0;
+
+            if (HeroSex == "Male") HSex = 1;
 
             MySqlConnection conn = dc.EstablishConn();
             try
             {
-                string query = "INSERT INTO `Scenario`(`ScenarioName`, `ScenarioDescription`) VALUES ('" + ScenarioName + "','" + ScenarioDesc + "')";
+                string query = "INSERT INTO `cmb`.`hero`(`HeroZodiac`,`HeroSubrace`,`HeroGod`,`HeroPath`,`HeroBloodline`,`HeroScenario`,`HeroAccount`,`HeroName`,`HeroSurname`,`HeroSex`,`HeroAlignment`)VALUES('"+HeroZodiac+"','"+HeroSubrace+"','"+HeroGod+"','"+HeroPath+"','"+HeroBloodline+"','"+ScenID+"','"+AccID+"','"+HeroName+"','"+HeroSurname+"','"+HSex+"','"+HeroAlignment+"');";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 reader.Close();
@@ -481,6 +490,66 @@ namespace CharacterManagerBloodlust
             conn.Close();
 
             return true;
+        }
+
+        private int FindBloodline(string p)
+        {
+            int x = 0;
+            string query = "SELECT `BloodlineID` FROM `Bloodline` WHERE `BloodlineName`='" + p + "'";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                x = reader.GetInt32(0);
+            }
+            return x;
+        }
+
+        private int FindPath(string p)
+        {
+            int x = 0;
+            string query = "SELECT `PathID` FROM `Path` WHERE `PathName`='" + p + "'";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                x = reader.GetInt32(0);
+            }
+            return x;
+        }
+
+        private int FindZodiac(string p)
+        {
+            int x = 0;
+            string query = "SELECT `ZodiacID` FROM `Zodiac` WHERE `ZodiacName`='" + p + "'";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                x = reader.GetInt32(0);
+            }
+            return x;
+        }
+
+        private int FindGod(string p)
+        {
+            int x = 0;
+            string query = "SELECT `GodID` FROM `God` WHERE `GodName`='"+p+"'";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                x = reader.GetInt32(0);
+            }
+            return x;
+        }
+
+        private int FindSubrace(string p)
+        {
+            int x = 0;
+            string query = "SELECT `SubraceID` FROM `Subrace` WHERE `SubraceName`='"+p+"'";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                x= reader.GetInt32(0);
+            }
+            return x;
         }
 
         private string[] GetHeroData()
@@ -497,7 +566,7 @@ namespace CharacterManagerBloodlust
                 x[3] = sd.AlignmentBox.Text;
                 x[4] = sd.SubraceBox.SelectedItem.ToString();
                 x[5] = sd.GodBox.SelectedItem.ToString();
-                x[6] = sd.ZodiacView.SelectedItems.ToString();
+                x[6] = sd.ZodiacBox.SelectedItem.ToString();
                 x[7] = sd.PathTreeView.SelectedNode.Text;
                 x[8] = sd.BloodlineBox.SelectedItem.ToString();
             }
@@ -517,5 +586,129 @@ namespace CharacterManagerBloodlust
             return x;
         }
 
+        private void LoadHeroes(object sender, EventArgs e)
+        {
+            MySqlConnection conn = dc.EstablishConn();
+            string query = "SELECT `HeroName` FROM `Hero` WHERE `HeroScenario`="+GetScenID()+";";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                CharacterList.Items.Add(reader.GetString(0));
+            }
+            if(CharacterList.Items.Count>0)
+            CharacterList.SetSelected(0, true);
+
+            //LoadCharacteristics();
+        }
+
+        private void LoadCharacteristics()
+        {
+            string query = "SELECT `HeroName`,`HeroSurname`,`HeroSex`,`HeroAlignment`,`HeroSubrace`,`HeroGod`,HeroPath,HeroBloodline,HeroZodiac,HeroInventory,HeroNotes FROM `Hero` WHERE `HeroName`='"+CharacterList.SelectedItem.ToString()+"'";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                NameField.Text = reader.GetString(0);
+                SurnameField.Text = reader.GetString(1);
+                if (reader.GetInt32(2) == 1) SexField.Text = "Male"; else SexField.Text = "Female";
+                AlignmentField.Text = reader.GetString(3);
+                RaceField.Text = LoadHeroRace(reader.GetInt32(4));
+                SubraceField.Text = LoadHeroSubrace(reader.GetInt32(4));
+                GodField.Text = LoadHeroGod(reader.GetInt32(5));
+                PathField.Text = LoadHeroPath(reader.GetInt32(6));
+                BloodlineField.Text = LoadHeroBloodline(reader.GetInt32(6));
+                ZodiacField.Text = LoadHeroZodiac(reader.GetInt32(7));
+                if (!reader.IsDBNull(8))
+                    InventoryBox.Text = reader.GetString(8);
+                if (!reader.IsDBNull(9))
+                    NotesBox.Text = reader.GetString(9);
+                
+            }
+
+            
+        }
+
+        private string LoadHeroZodiac(int p)
+        {
+            string z = "";
+            string query = "SELECT ZodiacName from Zodiac where Zodiacid=" + p + ";";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                z = reader.GetString(0);
+            }
+            return z;
+        }
+
+        private string LoadHeroBloodline(int p)
+        {
+            string z = "";
+            string query = "SELECT BloodlineName from Bloodline where Bloodlineid=" + p + ";";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                z = reader.GetString(0);
+            }
+            return z;
+        }
+
+        private string LoadHeroPath(int p)
+        {
+            string z = "";
+            string query = "SELECT PathName from Path where Pathid=" + p + ";";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                z = reader.GetString(0);
+            }
+            return z;
+        }
+
+        private string LoadHeroGod(int p)
+        {
+            string z = "";
+            string query = "SELECT GodName from God where godid=" + p + ";";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                z = reader.GetString(0);
+            }
+            return z;
+        }
+
+        private string LoadHeroSubrace(int p)
+        {
+            string z = "";
+            string query = "SELECT SubraceName from subrace where subraceid="+p+";";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                z = reader.GetString(0);
+            }
+            return z;
+        }
+
+        private string LoadHeroRace(int x)
+        {
+            string z = "";
+            string query = "SELECT DISTINCT `RaceName` FROM `Race`,`Subrace` WHERE `RaceID`=(SELECT `SubraceRace` FROM `subrace` WHERE `SubraceID`="+x+")";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                z = reader.GetString(0);
+            }
+            return z;
+        }
+
+        private void CharListClick(object sender, EventArgs e)
+        {
+            LoadCharacteristics();
+        }
+
+        private void UploadCharacter()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

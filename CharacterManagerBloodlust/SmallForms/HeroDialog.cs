@@ -29,14 +29,43 @@ namespace CharacterManagerBloodlust.SmallForms
             PrepareGod(sender,e);
             PrepareZodiac();
             PreparePath();
-            //PrepareBloodline();
+            PrepareBloodline();
+            DescBox.Clear();
+        }
+
+        private void PrepareBloodline()
+        {
+            string query = "SELECT `BloodlineName` FROM `Bloodline`";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                BloodlineBox.Items.Add(reader.GetString(0));
+            }
+            BloodlineBox.SetSelected(0,true);
+
+            BloodDesc();
+        }
+
+        private void BloodDesc()
+        {
+            string desc="";
+
+            string query = "SELECT `BloodlineDescription`,`FactorName` FROM `Bloodline`,`Factor` WHERE `FactorID`=(SELECT `BloodlineFactor` FROM `bloodline` WHERE `BloodlineName`='" + BloodlineBox.SelectedItem.ToString() + "') AND `BloodlineName`='" + BloodlineBox.SelectedItem.ToString() + "';";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                desc = reader.GetString(0) + " \nFactor: " + reader.GetString(1);
+            }
+            DescBox.Text = desc;
         }
 
         private void PreparePath()
         {
             List<string> paths = new List<string>();
             List<string> temp = new List<string>();
-            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
+            List<TreeNode> tn = new List<TreeNode>();
+            Dictionary<string, string[]> dic = new Dictionary<string, string[]>();
+            TreeNode pn, cpn;
 
             string query = "SELECT `PathName` FROM `Path`";
             MySqlDataReader reader = dc.ReadQuery(query);
@@ -47,15 +76,32 @@ namespace CharacterManagerBloodlust.SmallForms
 
             foreach (string p in paths)
             {
+
                 query = "SELECT DISTINCT `PathName` FROM `Path`,`pathoforigins` WHERE `PathID`IN(SELECT `Path_Pathoforigin` FROM `pathoforigins` WHERE `Path_PathID`IN(SELECT `PathID` FROM `Path` WHERE `PathName`='"+p+"'))";
                 reader = dc.ReadQuery(query);
                 while (reader.Read())
                 {
                     temp.Add(reader.GetString(0));
                 }
-                dic.Add(p, temp);
+                dic.Add(p, temp.ToArray());
+                temp.Clear();
+            }
+
+            foreach(KeyValuePair<string,string[]> x in dic)
+            {
+                foreach (string s in x.Value)
+                {
+                    cpn = new TreeNode(s);
+                    tn.Add(cpn);
+
+                }
+                pn = new TreeNode(x.Key,tn.ToArray());
+                tn.Clear();
+                PathTreeView.Nodes.Add(pn);
+
             }
         }
+
         private void PrepareGod(object sender, EventArgs e)
         {
             GodBox.Items.Clear();
@@ -94,8 +140,9 @@ namespace CharacterManagerBloodlust.SmallForms
 
         private void PrepareZodiac()
         {
-            ZodiacView.Items.Clear();
+            ZodiacBox.Items.Clear();
             HashSet<string> sr = new HashSet<string>();
+            //string[,] s=new string[3,4];
 
             MySqlConnection conn = dc.EstablishConn();
             string query = "SELECT * FROM `Zodiac`;";
@@ -106,9 +153,17 @@ namespace CharacterManagerBloodlust.SmallForms
             {
                 sr.Add(reader.GetString(1));
             }
-            foreach (string s in sr)
-                ZodiacView.Items.Add(s);
-            
+            ZodiacBox.MultiColumn = true;
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    for (int j = 0; j < 3; j++)
+            //    {
+            //        s[j, i] = sr.ToArray()[((i+1)*(j+1))-1];
+            //    }
+            //}
+            foreach(string s in sr)
+            ZodiacBox.Items.Add(s);
+            ZodiacBox.SetSelected(0, true);
         }
 
         private void PrepareSubrace()
@@ -184,6 +239,11 @@ namespace CharacterManagerBloodlust.SmallForms
         private void SubraceClick(object sender, EventArgs e)
         {
             RaceDesc();
+        }
+
+        private void BloodClick(object sender, EventArgs e)
+        {
+            BloodDesc();
         }
     }
 }
