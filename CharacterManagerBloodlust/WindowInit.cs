@@ -79,6 +79,8 @@ namespace CharacterManagerBloodlust
             foreach (string c in combo)
                 mainWin.ScenarioBox.Items.Add(c);
             mainWin.ScenarioBox.SelectedIndex = mainWin.ScenarioBox.Items.Count - 1;
+
+            mainWin.SetVisibility();
         }
         
     }

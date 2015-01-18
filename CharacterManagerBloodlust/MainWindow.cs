@@ -23,6 +23,17 @@ namespace CharacterManagerBloodlust
             InitializeComponent();
         }
 
+        public void SetVisibility()
+        {
+            if (GetAccType() == 3 && MainTabs.TabPages.Count==3)
+            {
+                MainTabs.TabPages.RemoveAt(2);
+                MainTabs.TabPages.RemoveAt(1);
+
+                button3.Visible = false;
+            }
+        }
+
         //
         //Buttons
         //
@@ -75,6 +86,16 @@ namespace CharacterManagerBloodlust
         private void button9_Click(object sender, EventArgs e)
         {
             UploadCharacter();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            InvitePlayerToScenario();
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            Logout();
         }
 
         //
@@ -588,8 +609,11 @@ namespace CharacterManagerBloodlust
 
         private void LoadHeroes(object sender, EventArgs e)
         {
+            SetVisibility();
+            
+            CharacterList.Items.Clear();
             MySqlConnection conn = dc.EstablishConn();
-            string query = "SELECT `HeroName` FROM `Hero` WHERE `HeroScenario`="+GetScenID()+";";
+            string query = "SELECT `HeroName` FROM `Hero` WHERE `HeroScenario`="+GetScenID()+" AND `HeroAccount`="+GetAccID()+";";
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -617,12 +641,12 @@ namespace CharacterManagerBloodlust
                 SubraceField.Text = LoadHeroSubrace(reader.GetInt32(4));
                 GodField.Text = LoadHeroGod(reader.GetInt32(5));
                 PathField.Text = LoadHeroPath(reader.GetInt32(6));
-                BloodlineField.Text = LoadHeroBloodline(reader.GetInt32(6));
-                ZodiacField.Text = LoadHeroZodiac(reader.GetInt32(7));
-                if (!reader.IsDBNull(8))
-                    InventoryBox.Text = reader.GetString(8);
+                BloodlineField.Text = LoadHeroBloodline(reader.GetInt32(7));
+                ZodiacField.Text = LoadHeroZodiac(reader.GetInt32(8));
                 if (!reader.IsDBNull(9))
-                    NotesBox.Text = reader.GetString(9);
+                    InventoryBox.Text = reader.GetString(9);
+                if (!reader.IsDBNull(10))
+                    NotesBox.Text = reader.GetString(10);
                 
             }
 
@@ -708,7 +732,72 @@ namespace CharacterManagerBloodlust
 
         private void UploadCharacter()
         {
-            throw new NotImplementedException();
+            string query = "UPDATE `hero` SET `HeroInventory` = '"+InventoryBox.Text+"',`HeroNotes` = '"+NotesBox.Text+"' WHERE `HeroID` = "+FindHeroId()+";";
+            MySqlDataReader reader = dc.ReadQuery(query);
         }
+
+        private int FindHeroId()
+        {
+            int z = 0;
+            string query = "SELECT HeroID FROM hero where heroname='" + CharacterList.SelectedItem.ToString() + "'";
+            MySqlDataReader reader = dc.ReadQuery(query);
+            while (reader.Read())
+            {
+                z = reader.GetInt32(0);
+            }
+            return z;
+        }
+
+        private bool InvitePlayerToScenario()
+        {
+            string[] flow = GetPlayerScenarioData();
+            if (flow[0] == null || flow[1] == null) return false;
+            string PlayerName = flow[0];
+            string ScenarioName = flow[1];
+
+            MySqlConnection conn = dc.EstablishConn();
+            try
+            {
+                string query = "INSERT INTO `account_has_scenario`(`AccountID`,`ScenarioID`)VALUES((Select AccountID from account where AccountName='" + PlayerName + "'),(Select ScenarioID from scenario where ScenarioName='"+ScenarioName+"'));";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            conn.Close();
+
+            return true;
+        }
+
+        private string[] GetPlayerScenarioData()
+        {
+            SmallForms.PlayerInviteDialog fd = new SmallForms.PlayerInviteDialog(UsernameLabel.Text);
+            string[] x = new string[3];
+
+            if (fd.ShowDialog(this) == DialogResult.OK)
+            {
+                x[0] = fd.PlayerList.Text;
+                x[1] = fd.ScenarioList.Text;
+            }
+            else
+            {
+                x[0] = null;
+                x[1] = null;
+            }
+            fd.Dispose();
+            return x;
+        }
+
+        private void Logout()
+        {
+            LoginScreen ls = new LoginScreen();
+            ls.Show();
+            this.Hide();
+        }
+
+        
     }
 }

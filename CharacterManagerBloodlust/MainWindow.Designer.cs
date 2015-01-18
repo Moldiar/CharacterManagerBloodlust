@@ -33,8 +33,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.CharacterList = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.Character = new System.Windows.Forms.TabPage();
+            this.MainTabs = new System.Windows.Forms.TabControl();
+            this.CharacterTab = new System.Windows.Forms.TabPage();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.BaseInfo = new System.Windows.Forms.TabPage();
             this.button9 = new System.Windows.Forms.Button();
@@ -62,13 +62,13 @@
             this.InventoryBox = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.NotesBox = new System.Windows.Forms.RichTextBox();
-            this.Scenario = new System.Windows.Forms.TabPage();
+            this.ScenarioTab = new System.Windows.Forms.TabPage();
             this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.FlowView = new System.Windows.Forms.ListView();
             this.OrderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Content = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Journal = new System.Windows.Forms.TabPage();
+            this.JournalTab = new System.Windows.Forms.TabPage();
             this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.JournalView = new System.Windows.Forms.ListView();
@@ -81,14 +81,16 @@
             this.UsernameLabel = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
-            this.Character.SuspendLayout();
+            this.LogoutButton = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.MainTabs.SuspendLayout();
+            this.CharacterTab.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.BaseInfo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.Scenario.SuspendLayout();
-            this.Journal.SuspendLayout();
+            this.ScenarioTab.SuspendLayout();
+            this.JournalTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -105,12 +107,12 @@
             this.ScenarioBox.FormattingEnabled = true;
             this.ScenarioBox.Location = new System.Drawing.Point(67, 6);
             this.ScenarioBox.Name = "ScenarioBox";
-            this.ScenarioBox.Size = new System.Drawing.Size(186, 21);
+            this.ScenarioBox.Size = new System.Drawing.Size(165, 21);
             this.ScenarioBox.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(259, 4);
+            this.button1.Location = new System.Drawing.Point(238, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(99, 23);
             this.button1.TabIndex = 2;
@@ -121,7 +123,7 @@
             // CharacterList
             // 
             this.CharacterList.FormattingEnabled = true;
-            this.CharacterList.Location = new System.Drawing.Point(12, 64);
+            this.CharacterList.Location = new System.Drawing.Point(12, 55);
             this.CharacterList.Name = "CharacterList";
             this.CharacterList.Size = new System.Drawing.Size(123, 82);
             this.CharacterList.TabIndex = 3;
@@ -130,33 +132,34 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 48);
+            this.label2.Location = new System.Drawing.Point(12, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Character List";
             // 
-            // tabControl1
+            // MainTabs
             // 
-            this.tabControl1.Controls.Add(this.Character);
-            this.tabControl1.Controls.Add(this.Scenario);
-            this.tabControl1.Controls.Add(this.Journal);
-            this.tabControl1.Location = new System.Drawing.Point(141, 33);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(398, 253);
-            this.tabControl1.TabIndex = 5;
+            this.MainTabs.Controls.Add(this.CharacterTab);
+            this.MainTabs.Controls.Add(this.ScenarioTab);
+            this.MainTabs.Controls.Add(this.JournalTab);
+            this.MainTabs.Location = new System.Drawing.Point(141, 33);
+            this.MainTabs.Name = "MainTabs";
+            this.MainTabs.Padding = new System.Drawing.Point(42, 3);
+            this.MainTabs.SelectedIndex = 0;
+            this.MainTabs.Size = new System.Drawing.Size(398, 253);
+            this.MainTabs.TabIndex = 5;
             // 
-            // Character
+            // CharacterTab
             // 
-            this.Character.Controls.Add(this.TabControl);
-            this.Character.Location = new System.Drawing.Point(4, 22);
-            this.Character.Name = "Character";
-            this.Character.Padding = new System.Windows.Forms.Padding(3);
-            this.Character.Size = new System.Drawing.Size(390, 227);
-            this.Character.TabIndex = 0;
-            this.Character.Text = "Character";
-            this.Character.UseVisualStyleBackColor = true;
+            this.CharacterTab.Controls.Add(this.TabControl);
+            this.CharacterTab.Location = new System.Drawing.Point(4, 22);
+            this.CharacterTab.Name = "CharacterTab";
+            this.CharacterTab.Padding = new System.Windows.Forms.Padding(3);
+            this.CharacterTab.Size = new System.Drawing.Size(390, 227);
+            this.CharacterTab.TabIndex = 0;
+            this.CharacterTab.Text = "CharacterTab";
+            this.CharacterTab.UseVisualStyleBackColor = true;
             // 
             // TabControl
             // 
@@ -165,6 +168,7 @@
             this.TabControl.Controls.Add(this.tabPage2);
             this.TabControl.Location = new System.Drawing.Point(0, 0);
             this.TabControl.Name = "TabControl";
+            this.TabControl.Padding = new System.Drawing.Point(38, 3);
             this.TabControl.SelectedIndex = 0;
             this.TabControl.Size = new System.Drawing.Size(390, 227);
             this.TabControl.TabIndex = 0;
@@ -418,19 +422,19 @@
             this.NotesBox.TabIndex = 1;
             this.NotesBox.Text = "";
             // 
-            // Scenario
+            // ScenarioTab
             // 
-            this.Scenario.Controls.Add(this.button7);
-            this.Scenario.Controls.Add(this.button5);
-            this.Scenario.Controls.Add(this.FlowView);
-            this.Scenario.Location = new System.Drawing.Point(4, 22);
-            this.Scenario.Name = "Scenario";
-            this.Scenario.Padding = new System.Windows.Forms.Padding(3);
-            this.Scenario.Size = new System.Drawing.Size(390, 227);
-            this.Scenario.TabIndex = 1;
-            this.Scenario.Text = "Scenario";
-            this.Scenario.UseVisualStyleBackColor = true;
-            this.Scenario.Enter += new System.EventHandler(this.button7_Click);
+            this.ScenarioTab.Controls.Add(this.button7);
+            this.ScenarioTab.Controls.Add(this.button5);
+            this.ScenarioTab.Controls.Add(this.FlowView);
+            this.ScenarioTab.Location = new System.Drawing.Point(4, 22);
+            this.ScenarioTab.Name = "ScenarioTab";
+            this.ScenarioTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ScenarioTab.Size = new System.Drawing.Size(390, 227);
+            this.ScenarioTab.TabIndex = 1;
+            this.ScenarioTab.Text = "Scenario";
+            this.ScenarioTab.UseVisualStyleBackColor = true;
+            this.ScenarioTab.Enter += new System.EventHandler(this.button7_Click);
             // 
             // button7
             // 
@@ -474,18 +478,18 @@
             this.Content.Text = "Description";
             this.Content.Width = 348;
             // 
-            // Journal
+            // JournalTab
             // 
-            this.Journal.BackColor = System.Drawing.Color.Transparent;
-            this.Journal.Controls.Add(this.button8);
-            this.Journal.Controls.Add(this.button6);
-            this.Journal.Controls.Add(this.JournalView);
-            this.Journal.Location = new System.Drawing.Point(4, 22);
-            this.Journal.Name = "Journal";
-            this.Journal.Size = new System.Drawing.Size(390, 227);
-            this.Journal.TabIndex = 2;
-            this.Journal.Text = "Journal";
-            this.Journal.Enter += new System.EventHandler(this.button8_Click);
+            this.JournalTab.BackColor = System.Drawing.Color.Transparent;
+            this.JournalTab.Controls.Add(this.button8);
+            this.JournalTab.Controls.Add(this.button6);
+            this.JournalTab.Controls.Add(this.JournalView);
+            this.JournalTab.Location = new System.Drawing.Point(4, 22);
+            this.JournalTab.Name = "JournalTab";
+            this.JournalTab.Size = new System.Drawing.Size(390, 227);
+            this.JournalTab.TabIndex = 2;
+            this.JournalTab.Text = "Journal";
+            this.JournalTab.Enter += new System.EventHandler(this.button8_Click);
             // 
             // button8
             // 
@@ -543,7 +547,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 152);
+            this.button2.Location = new System.Drawing.Point(12, 143);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(122, 23);
             this.button2.TabIndex = 6;
@@ -572,7 +576,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 263);
+            this.button3.Location = new System.Drawing.Point(12, 201);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(122, 23);
             this.button3.TabIndex = 9;
@@ -582,7 +586,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 234);
+            this.button4.Location = new System.Drawing.Point(12, 172);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(122, 23);
             this.button4.TabIndex = 10;
@@ -590,17 +594,39 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // LogoutButton
+            // 
+            this.LogoutButton.Location = new System.Drawing.Point(15, 263);
+            this.LogoutButton.Name = "LogoutButton";
+            this.LogoutButton.Size = new System.Drawing.Size(119, 23);
+            this.LogoutButton.TabIndex = 11;
+            this.LogoutButton.Text = "Logout";
+            this.LogoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(12, 230);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(122, 23);
+            this.button10.TabIndex = 12;
+            this.button10.Text = "Invite Player";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(551, 298);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.LogoutButton);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.MainTabs);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CharacterList);
             this.Controls.Add(this.button1);
@@ -610,15 +636,15 @@
             this.Text = "Character Manager - Bloodlust";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.Load += new System.EventHandler(this.LoadHeroes);
-            this.tabControl1.ResumeLayout(false);
-            this.Character.ResumeLayout(false);
+            this.MainTabs.ResumeLayout(false);
+            this.CharacterTab.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.BaseInfo.ResumeLayout(false);
             this.BaseInfo.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.Scenario.ResumeLayout(false);
-            this.Journal.ResumeLayout(false);
+            this.ScenarioTab.ResumeLayout(false);
+            this.JournalTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -630,10 +656,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox CharacterList;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage Character;
-        private System.Windows.Forms.TabPage Scenario;
-        private System.Windows.Forms.TabPage Journal;
+        private System.Windows.Forms.TabControl MainTabs;
+        private System.Windows.Forms.TabPage CharacterTab;
         private System.Windows.Forms.ListView JournalView;
         private System.Windows.Forms.ColumnHeader JournalName;
         private System.Windows.Forms.ColumnHeader Description;
@@ -679,6 +703,10 @@
         private System.Windows.Forms.TextBox BloodlineField;
         private System.Windows.Forms.TextBox PathField;
         private System.Windows.Forms.TextBox GodField;
+        public System.Windows.Forms.TabPage ScenarioTab;
+        public System.Windows.Forms.TabPage JournalTab;
+        private System.Windows.Forms.Button LogoutButton;
+        private System.Windows.Forms.Button button10;
     }
 }
 

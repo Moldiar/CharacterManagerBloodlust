@@ -86,6 +86,12 @@
     <Compile Include="SmallForms\JournalDialog.Designer.cs">
       <DependentUpon>JournalDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="SmallForms\PlayerInviteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SmallForms\PlayerInviteDialog.Designer.cs">
+      <DependentUpon>PlayerInviteDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="SmallForms\ScenarioDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SmallForms\JournalDialog.resx">
       <DependentUpon>JournalDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SmallForms\PlayerInviteDialog.resx">
+      <DependentUpon>PlayerInviteDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SmallForms\ScenarioDialog.resx">
       <DependentUpon>ScenarioDialog.cs</DependentUpon>
