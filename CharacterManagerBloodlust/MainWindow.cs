@@ -8,24 +8,150 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using CharacterManagerBloodlust.Types;
 
 
 namespace CharacterManagerBloodlust
 {
     public partial class MainWindow : Form
     {
+        /// <summary>
+        /// Main Variables
+        /// </summary>
         List<string> read = new List<string>();
 
         DatabaseCommon dc = new DatabaseCommon();
 
+        static List<Hero> heroes = new List<Hero>();
+        static List<Scenario> scenarios = new List<Scenario>();
+        static List<Journal> journal = new List<Journal>();
+        static List<Entries> entries = new List<Entries>();
+        static Account account;
+        //-----------------------------------------------------------------
+
+        /// <summary>
+        /// Initializing the Main Window
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
+        //-----------------------------------------------------------------
 
+        /// <summary>
+        /// Setup of the Main window depending on the login information
+        /// </summary>
+        
+
+        /// <summary>
+        /// Main Setup Method. It sets the Username label, creates the three primary information handlers (Heroes, Scenarios, Account) and 
+        /// loads all basic lists into the main window
+        /// </summary>
+        /// <param name="usr">Account Name String on which is all based on</param>
+        internal void SettingUp(string usr)
+        {
+            int startIndex=0;
+            account = new Account(usr);
+            int scenID = Scen(account.ID,startIndex);
+            UsernameLabel.Text = usr;
+            Heroes(account.ID,scenID,startIndex);
+            LoadCharacterInfo(startIndex);
+            SetAll();
+        }
+
+        /// <summary>
+        /// This method loads all selected character information into the text fields on the main window
+        /// </summary>
+        /// <param name="index">A helper variable which sets which object in the array to load first</param>
+        private void LoadCharacterInfo(int index)
+        {
+            Hero h = new Hero(); ;
+            try
+            {
+                h = heroes.ToArray()[index];
+            }
+            catch (IndexOutOfRangeException ex) { ex.ToString(); }
+
+            NameField.Text = h.Name;
+            SurnameField.Text = h.Surname;
+            SexField.Text = h.Sex;
+            AlignmentField.Text = h.Alignment;
+            RaceField.Text = h.Race;
+            SubraceField.Text = h.Subrace;
+            GodField.Text = h.God;
+            PathField.Text = h.Path;
+            BloodlineField.Text = h.Bloodline;
+            ZodiacField.Text = h.Zodiac;
+            //if (!h.Inventory)
+                InventoryBox.Text = h.Inventory;
+            //if (!reader.IsDBNull(10))
+                NotesBox.Text = h.Notes;
+        }
+
+        /// <summary>
+        /// This method loads the character list depending on the account and scenario. It also takes an index for which object should 
+        /// be chosen by default from the list.
+        /// </summary>
+        /// <param name="AccID">Account ID of the logged user</param>
+        /// <param name="ScenID">Scenario ID of the chosen scenario from the list</param>
+        /// <param name="index">A helper variable which sets which object in the array to load first</param>
+        private void Heroes(int AccID, int ScenID,int index)
+        {
+            Hero h = new Hero();
+            heroes = h.ByAccountID(AccID, ScenID);
+
+            foreach (Hero y in heroes)
+            {
+                CharacterList.Items.Add(y.Name);
+            }
+            try
+            {
+                CharacterList.SelectedIndex = index;
+            }
+            catch (ArgumentOutOfRangeException ex) { ex.ToString(); }
+        }
+
+        /// <summary>
+        /// This method loads the list of scenarios into a combobox in the main window with the use of the Account ID it gets and the 
+        /// index which it uses to determine which scenario set as the default.
+        /// </summary>
+        /// <param name="AccID">Account ID of the logged user</param>
+        /// <param name="index">A helper variable which sets which object in the array to load first</param>
+        /// <returns>Returns the ID of the chosen scenario from the list</returns>
+        private int Scen(int AccID,int index)
+        {
+            Scenario scen = new Scenario();
+            scenarios=scen.ByAccountID(AccID);
+
+            foreach (Scenario y in scenarios)
+            {
+                ScenarioBox.Items.Add(y.Name);
+            }
+            try{
+                ScenarioBox.SelectedIndex = index;// ScenarioBox.Items.Count - 1;
+            }
+            catch (ArgumentOutOfRangeException ex) { ex.ToString(); }
+            Scenario IDGet = new Scenario(ScenarioBox.Text);
+            return IDGet.ID;
+        }
+
+        private void Journal()
+        {
+
+        }
+
+        private void Entries()
+        {
+
+        }
+
+        /// <summary>
+        /// A method to set the visibility of controls for different account types.
+        /// </summary>
         public void SetVisibility()
         {
-            if (GetAccType() == 3 && MainTabs.TabPages.Count==3)
+            if (account.AccountType == "Player" 
+                && MainTabs.TabPages.Count == 3)
             {
                 MainTabs.TabPages.RemoveAt(2);
                 MainTabs.TabPages.RemoveAt(1);
@@ -34,66 +160,81 @@ namespace CharacterManagerBloodlust
             }
         }
 
-        //
-        //Buttons
-        //
-
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Helper method to cover the field of setting up without going into detailed method making. (Empty for now)
+        /// </summary>
+        private void SetAll()
         {
+        }
+        //-----------------------------------------------------------------
+
+        /// <summary>
+        /// This Section is dedicated for all buttons on the main window.
+        /// </summary>
+        
+        //-----------------------------------------------------------------
+
+        /// <summary>
+        /// The Scenario Reload button method. It loads the list of all scenarios manually. It also loads the journal and scenario entry views.
+        /// </summary>
+        private void ScenarioRldBtn(object sender, EventArgs e) //For rebuilding
+        {
+            int index = ScenarioBox.SelectedIndex;
             ScenarioBox.Items.Clear();
-            SimpleScenarioReload(GetAccID());
-            button7_Click(sender,e);
-            button8_Click(sender, e);
+            Scen(account.ID, index);
+
+            //button7_Click(sender,e); //Scenario Entries
+            //button8_Click(sender, e); //Journal
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) //For rebuilding
         {
             LoadHeroes(sender,e);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) //For rebuilding
         {
             NewScenario();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) //For rebuilding
         {
             NewHero();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e) //For rebuilding
         {
             NewScenarioEntry();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e) //For rebuilding
         {
             NewJournalEntry();
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e) //For rebuilding
         {
             FlowView.Items.Clear();
             LoadScenarioEntries();
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e) //For rebuilding
         {
             JournalView.Items.Clear();
             LoadJournalEntries();
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e) //For rebuilding
         {
             UploadCharacter();
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e) //For rebuilding
         {
             InvitePlayerToScenario();
         }
 
-        private void LogoutButton_Click(object sender, EventArgs e)
+        private void LogoutButton_Click(object sender, EventArgs e) //For rebuilding
         {
             Logout();
         }
@@ -609,7 +750,7 @@ namespace CharacterManagerBloodlust
 
         private void LoadHeroes(object sender, EventArgs e)
         {
-            SetVisibility();
+            //SetVisibility();
             
             CharacterList.Items.Clear();
             MySqlConnection conn = dc.EstablishConn();
@@ -629,25 +770,36 @@ namespace CharacterManagerBloodlust
 
         private void LoadCharacteristics()
         {
-            string query = "SELECT `HeroName`,`HeroSurname`,`HeroSex`,`HeroAlignment`,`HeroSubrace`,`HeroGod`,HeroPath,HeroBloodline,HeroZodiac,HeroInventory,HeroNotes FROM `Hero` WHERE `HeroName`='"+CharacterList.SelectedItem.ToString()+"'";
-            MySqlDataReader reader = dc.ReadQuery(query);
-            while (reader.Read())
+            try
             {
-                NameField.Text = reader.GetString(0);
-                SurnameField.Text = reader.GetString(1);
-                if (reader.GetInt32(2) == 1) SexField.Text = "Male"; else SexField.Text = "Female";
-                AlignmentField.Text = reader.GetString(3);
-                RaceField.Text = LoadHeroRace(reader.GetInt32(4));
-                SubraceField.Text = LoadHeroSubrace(reader.GetInt32(4));
-                GodField.Text = LoadHeroGod(reader.GetInt32(5));
-                PathField.Text = LoadHeroPath(reader.GetInt32(6));
-                BloodlineField.Text = LoadHeroBloodline(reader.GetInt32(7));
-                ZodiacField.Text = LoadHeroZodiac(reader.GetInt32(8));
-                if (!reader.IsDBNull(9))
-                    InventoryBox.Text = reader.GetString(9);
-                if (!reader.IsDBNull(10))
-                    NotesBox.Text = reader.GetString(10);
-                
+                string query = "SELECT `HeroName`,`HeroSurname`,`HeroSex`,`HeroAlignment`,`HeroSubrace`,`HeroGod`,HeroPath,HeroBloodline,HeroZodiac,HeroInventory,HeroNotes FROM `Hero` WHERE `HeroName`='" + CharacterList.Text + "'";
+                MySqlDataReader reader = dc.ReadQuery(query);
+                while (reader.Read())
+                {
+                    NameField.Text = reader.GetString(0);
+                    SurnameField.Text = reader.GetString(1);
+                    if (reader.GetInt32(2) == 1) SexField.Text = "Male"; else SexField.Text = "Female";
+                    AlignmentField.Text = reader.GetString(3);
+                    RaceField.Text = LoadHeroRace(reader.GetInt32(4));
+                    SubraceField.Text = LoadHeroSubrace(reader.GetInt32(4));
+                    GodField.Text = LoadHeroGod(reader.GetInt32(5));
+                    PathField.Text = LoadHeroPath(reader.GetInt32(6));
+                    BloodlineField.Text = LoadHeroBloodline(reader.GetInt32(7));
+                    ZodiacField.Text = LoadHeroZodiac(reader.GetInt32(8));
+                    if (!reader.IsDBNull(9))
+                        InventoryBox.Text = reader.GetString(9);
+                    if (!reader.IsDBNull(10))
+                        NotesBox.Text = reader.GetString(10);
+
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
             
@@ -797,6 +949,13 @@ namespace CharacterManagerBloodlust
             ls.Show();
             this.Hide();
         }
+
+        private void ScenarioBoxSelectionChangeCommitted(object sender, EventArgs e)//review to adapt to new code
+        {
+            LoadHeroes(sender,e);
+        }
+
+
 
         
     }

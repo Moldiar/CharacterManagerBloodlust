@@ -86,6 +86,17 @@ namespace CharacterManagerBloodlust
             
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void KeyPressing(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+                button1_Click(sender, e);
+        }
+
         
     }
 }

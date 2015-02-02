@@ -104,11 +104,15 @@
             // 
             // ScenarioBox
             // 
+            this.ScenarioBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ScenarioBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ScenarioBox.FormattingEnabled = true;
             this.ScenarioBox.Location = new System.Drawing.Point(67, 6);
             this.ScenarioBox.Name = "ScenarioBox";
             this.ScenarioBox.Size = new System.Drawing.Size(165, 21);
             this.ScenarioBox.TabIndex = 1;
+            this.ScenarioBox.TabStop = false;
+            this.ScenarioBox.SelectionChangeCommitted += new System.EventHandler(this.ScenarioBoxSelectionChangeCommitted);
             // 
             // button1
             // 
@@ -118,7 +122,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Reload Scenarios";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.ScenarioRldBtn);
             // 
             // CharacterList
             // 

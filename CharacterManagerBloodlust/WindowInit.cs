@@ -33,7 +33,8 @@ namespace CharacterManagerBloodlust
         {
             mainWin.Show();
             mainWin.UsernameLabel.Text = username;
-            LoadScenarios(username);
+            mainWin.SettingUp(username);
+            //LoadScenarios(username);
             x.Hide();
             return true;
         }
@@ -80,7 +81,7 @@ namespace CharacterManagerBloodlust
                 mainWin.ScenarioBox.Items.Add(c);
             mainWin.ScenarioBox.SelectedIndex = mainWin.ScenarioBox.Items.Count - 1;
 
-            mainWin.SetVisibility();
+            //mainWin.SetVisibility();
         }
         
     }

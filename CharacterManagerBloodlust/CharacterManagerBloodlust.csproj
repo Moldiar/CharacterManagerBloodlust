@@ -98,6 +98,11 @@
     <Compile Include="SmallForms\ScenarioDialog.Designer.cs">
       <DependentUpon>ScenarioDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Types\Account.cs" />
+    <Compile Include="Types\Entries.cs" />
+    <Compile Include="Types\Hero.cs" />
+    <Compile Include="Types\Journal.cs" />
+    <Compile Include="Types\Scenario.cs" />
     <Compile Include="WindowInit.cs" />
     <EmbeddedResource Include="CreateAccount.resx">
       <DependentUpon>CreateAccount.cs</DependentUpon>
@@ -146,9 +151,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Graphics\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -39,7 +39,7 @@ namespace CharacterManagerBloodlust
             MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataReader reader = cmd.ExecuteReader();
 
-            
+            //conn.Close();
             return reader;
         }
     }
